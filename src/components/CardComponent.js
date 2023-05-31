@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFavorites, toggleFavorite } from '../actions/index';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const endPoint = 'https://api.dev.wdtek.xyz/restaurants';
@@ -11,21 +13,22 @@ const CardComponent = () => {
   const [offset, setOffset] = useState(0);
   const [hasMoreRestarant, setHasMoreRestarant] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [favorites, setFavorites] = useState([]);
 
   const navigation = useNavigation();
 
   useEffect(() => {
     loadRestaurants();
-    loadFavorites();
   }, []);
+
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites);
 
   const loadFavorites = async () => {
     try {
       const favoritesData = await AsyncStorage.getItem('favorites');
       const favoritesList = JSON.parse(favoritesData);
       if (favoritesList) {
-        setFavorites(favoritesList);
+        dispatch(setFavorites(favoritesList));
       }
     } catch (error) {
       console.error('Error loading favorites:', error);
@@ -68,7 +71,7 @@ const CardComponent = () => {
     <TouchableWithoutFeedback onPress={() => navigateToDetailView(item)}>
       <View style={styles.listItem} key={item._id}>
         <Text key={item._id}>{item.name.toUpperCase()}</Text>
-        <TouchableOpacity onPress={() => toggleFavorite(item)}>
+        <TouchableOpacity onPress={() => dispatch(toggleFavorite(item))}>
           {favorites.some((fav) => fav._id === item._id) ? (
             <Ionicons name="star" size={24} color="gold" style={styles.starIcon} />
           ) : (
@@ -81,25 +84,6 @@ const CardComponent = () => {
 
   const navigateToDetailView = (restaurant) => {
     navigation.navigate('DetailView', { restaurant });
-  };
-
-  const toggleFavorite = async (restaurant) => {
-    const isFavorite = favorites.some((fav) => fav._id === restaurant._id);
-
-    let updatedFavorites = [];
-    if (isFavorite) {
-      updatedFavorites = favorites.filter((fav) => fav._id !== restaurant._id);
-    } else {
-      updatedFavorites = [...favorites, restaurant];
-    }
-
-    setFavorites(updatedFavorites);
-
-    try {
-      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    } catch (error) {
-      console.error('Error storing favorites:', error);
-    }
   };
 
   return (
@@ -131,7 +115,7 @@ const styles = StyleSheet.create({
   },
   starIcon: {
     marginRight: 10,
-    textAlign:'right'
+    textAlign: 'right',
   },
 });
 
