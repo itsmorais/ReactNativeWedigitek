@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFavorites, toggleFavorite } from '../actions/index';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailView = ({ route }) => {
   const { restaurant } = route.params;
@@ -25,28 +26,10 @@ const DetailView = ({ route }) => {
     }
   };
 
-  const toggleFavorite = async () => {
-    const isFavorite = favorites.some((fav) => fav._id === restaurant._id);
-
-    let updatedFavorites = [];
-    if (isFavorite) {
-      updatedFavorites = favorites.filter((fav) => fav._id !== restaurant._id);
-    } else {
-      updatedFavorites = [...favorites, restaurant];
-    }
-
-    dispatch(toggleFavorite(restaurant));
-
-    try {
-      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    } catch (error) {
-      console.error('Error storing favorites:', error);
-    }
-  };
 
   return (
     <SafeAreaView>
-<TouchableOpacity onPress={() => dispatch(toggleFavorite(restaurant))}>
+      <TouchableOpacity onPress={() => dispatch(toggleFavorite(restaurant))}>
         {favorites.some((fav) => fav._id === restaurant._id) ? (
           <Ionicons name="star" size={24} color="gold" style={styles.starIcon} />
         ) : (
@@ -78,6 +61,8 @@ const DetailView = ({ route }) => {
     </SafeAreaView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   starIcon: {
