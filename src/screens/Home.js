@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { useDispatch, ReactReduxContext } from 'react-redux';
 import { setFavorites, setRestaurants } from '../actions/index';
 import useDidMountEffect from '../hook/useDidMount';
 import Card from '../components/Home/Card';
-
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const endPoint = 'https://api.dev.wdtek.xyz/restaurants';
 
 const Home = () => {
@@ -16,9 +14,9 @@ const Home = () => {
   const [hasMoreRestarant, setHasMoreRestarant] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([])
+  const [render, setRender] = useState(false)
   const dispatch = useDispatch();
   const { store } = useContext(ReactReduxContext)
-  const [render, setRender] = useState(false)
 
 
   const getAllFavorites = async () => {
@@ -28,24 +26,15 @@ const Home = () => {
 
   getAllFavorites()
 
-
-  
-
   const isFocused = useIsFocused()
 
   useEffect(() => {
     loadRestaurants()
   }, [isFocused])
 
-  useEffect(() => {
-    setData(store.getState().restaurants)
-  }, []);
 
   useDidMountEffect(() => {
     setData(store.getState().restaurants)
-    console.log("ACHEI")
-
-
   }, [render])
 
 
@@ -88,17 +77,16 @@ const Home = () => {
 
   const stateChanger = () => {
     setRender(!render)
-
   }
- 
 
- 
+
+
 
   return (
-    <FlatList 
+    <FlatList
       contentContainerStyle={styles.list}
       data={data}
-      renderItem={(item) => <Card stateChanger={stateChanger} restaurant={item}/>}
+      renderItem={(item) => <Card stateChanger={stateChanger} restaurant={item} />}
       keyExtractor={(_, index) => String(index)}
       onEndReached={loadRestaurants}
       onEndReachedThreshold={0.1}
@@ -116,7 +104,7 @@ const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 13,
   },
-  
+
 });
 
 export default Home;

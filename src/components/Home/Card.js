@@ -6,8 +6,6 @@ import { useDispatch } from 'react-redux';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-import { useState } from "react";
-
 const Card = ({ restaurant, stateChanger }) => {
   const item = restaurant.item;
 
