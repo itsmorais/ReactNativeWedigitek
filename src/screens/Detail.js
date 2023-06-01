@@ -81,7 +81,7 @@ const DetailView = ({ route }) => {
             </Text>
           ))
         ) : (
-          <Text style={styles.desconhecido}>Desconhecido</Text>
+          <Text style={styles.desconhecido}>-</Text>
         )}
         <Text style={styles.title}>Endereço:</Text>
         {data.addressInfo ? (
@@ -94,7 +94,7 @@ const DetailView = ({ route }) => {
             )}
           </>
         ) : (
-          <Text style={styles.desconhecido}>Desconhecido</Text>
+          <Text style={styles.desconhecido}>-</Text>
         )}
         <Text style={styles.title}>Contato:</Text>
         <Text style={styles.detalhes}>E-mail: {data.contacts.email}</Text>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   desconhecido: {
     fontSize:21,
-    color: 'red',
+    color: 'white',
     fontFamily:'dmSans-italic'
   },
   detalhes: {
