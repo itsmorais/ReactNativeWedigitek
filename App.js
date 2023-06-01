@@ -14,8 +14,26 @@ function App() {
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
-          <Stack.Screen name='Home' component={Home}></Stack.Screen>
-          <Stack.Screen name='DetailView' component={Detail}></Stack.Screen>
+          <Stack.Screen name='Home' component={Home} options={{
+            title: 'Home',
+            headerStyle: {
+              backgroundColor: '#ff611d',
+            },
+            headerTintColor: 'whitesmoke',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}></Stack.Screen>
+          <Stack.Screen name='DetailView' component={Detail} options={{
+            title: 'Detail',
+            headerStyle: {
+              backgroundColor: 'white',
+            },
+            headerTintColor: '#ff611d',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}></Stack.Screen>
         </Stack.Navigator>
       </Provider>
 
