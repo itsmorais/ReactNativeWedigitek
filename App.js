@@ -13,7 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 function App() {
   return (
     <NavigationContainer>
-          <StatusBar barStyle='dark-content'></StatusBar>
+      <StatusBar barStyle='dark-content'></StatusBar>
       <Provider store={store}>
         <Stack.Navigator>
 

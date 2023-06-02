@@ -14,10 +14,11 @@ const Card = ({ restaurant, stateChanger }) => {
   const [isFontsLoaded] = useFonts({
     'dmSans-regular': require('../../assets/fonts/DMSans-Regular.ttf'),
     'dmSans-bold': require('../../assets/fonts/DMSans-Bold.ttf'),
-    'dmSans-italic':require('../../assets/fonts/DMSans-Italic.ttf')
+    'dmSans-italic': require('../../assets/fonts/DMSans-Italic.ttf')
   });
 
   SplashScreen.preventAutoHideAsync();
+
   const handleOnLayout = async () => {
     if (isFontsLoaded) {
       await SplashScreen.hideAsync();
@@ -45,13 +46,13 @@ const Card = ({ restaurant, stateChanger }) => {
     <TouchableWithoutFeedback onPress={() => navigateToDetailView(item)}>
       <View style={[styles.card, styles.shadowProp, styles.list]} onLayout={handleOnLayout} key={item._id}>
         <Image source={{ uri: url }} style={styles.image}></Image>
-          <TouchableOpacity style={styles.favoriteButton} onPress={() => changeFavoriteVisibility(item)} activeOpacity={0.8}>
-            {item.isFavorite ? (
-              <Ionicons name="star" size={35} color="gold" />
-            ) : (
-              <Ionicons name="star-outline" size={35} color="gold" />
-            )}
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.favoriteButton} onPress={() => changeFavoriteVisibility(item)} activeOpacity={0.8}>
+          {item.isFavorite ? (
+            <Ionicons name="star" size={35} color="gold" />
+          ) : (
+            <Ionicons name="star-outline" size={35} color="gold" />
+          )}
+        </TouchableOpacity>
         <View style={styles.itens}>
           <Text style={styles.title} key={item._id}>{item.name.toUpperCase()}</Text>
         </View>
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: 'white',
-    fontFamily:'dmSans-bold',
+    fontFamily: 'dmSans-bold',
   },
   itens: {
     display: 'flex',

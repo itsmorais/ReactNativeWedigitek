@@ -13,29 +13,29 @@ export const toggleFavorite = (restaurant) => {
 }
 
 export const setFavorites = (favorites) => {
-  return{
+  return {
     type: SET_FAVORITE,
     payload: favorites
   }
 }
 
 export const getRestaurants = (params) => {
-  return{
+  return {
     type: TESTE,
     payload: params
   }
 }
 
-export const setRestaurants = (params) =>{
-  return{
+export const setRestaurants = (params) => {
+  return {
     type: SET_RESTAURANTS,
-    payload:params
+    payload: params
   }
 }
 
-export const updateRestaurantFavorite = (params) =>{
-  return{
-    type:TOOGLE_RESTAURANT_FAVORITE,
-    payload:params
+export const updateRestaurantFavorite = (params) => {
+  return {
+    type: TOOGLE_RESTAURANT_FAVORITE,
+    payload: params
   }
 }

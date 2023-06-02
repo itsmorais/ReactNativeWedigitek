@@ -24,12 +24,12 @@ const Home = () => {
     dispatch(setFavorites(JSON.parse(favoritesLoad)))
   }
 
-  getAllFavorites()
 
   const isFocused = useIsFocused()
 
   useEffect(() => {
     loadRestaurants()
+    getAllFavorites()
   }, [isFocused])
 
 
