@@ -77,11 +77,7 @@ const restaurantsReducer = (state = [], action) => {
       return state
   }
 
-
-
 }
-
-
 
 const rootReducer = combineReducers({
   favorites: favoritesReducer,

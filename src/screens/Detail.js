@@ -9,15 +9,15 @@ import * as SplashScreen from 'expo-splash-screen';
 const DetailView = ({ route }) => {
   const { _id } = route.params.restaurant;
   const { store } = useContext(ReactReduxContext);
-  const dispatch = useDispatch();
   const [data, setData] = useState(route.params.restaurant);
   const [isFontsLoaded] = useFonts({
     'dmSans-regular': require('../assets/fonts/DMSans-Regular.ttf'),
     'dmSans-bold': require('../assets/fonts/DMSans-Bold.ttf'),
-    'dmSans-italic':require('../assets/fonts/DMSans-Italic.ttf')
+    'dmSans-italic': require('../assets/fonts/DMSans-Italic.ttf')
   });
-
   SplashScreen.preventAutoHideAsync();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadData();
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     marginTop: 35,
     fontWeight: 'bold',
     fontFamily: 'dmSans-bold',
-    textTransform:'uppercase'
+    textTransform: 'uppercase'
   },
   container: {
     width: '100%',
@@ -134,16 +134,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   desconhecido: {
-    fontSize:21,
+    fontSize: 21,
     color: 'white',
-    fontFamily:'dmSans-italic'
+    fontFamily: 'dmSans-italic'
   },
   detalhes: {
     fontSize: 21,
-    textAlign:'center',
+    textAlign: 'center',
     color: 'whitesmoke',
-    fontFamily:'dmSans-regular',
-    textTransform:'capitalize'
+    fontFamily: 'dmSans-regular',
+    textTransform: 'capitalize'
   },
 });
 
